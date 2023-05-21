@@ -39,6 +39,12 @@ export default class ExpressServer {
         res.json({ message: "pong" });
       }
     );
+    this.app.set("view engine", "ejs");
+    this.app.set("views", "public");
+    this.app.get("/", (req, res) => {
+      res.render("layout")
+    });
+
 
     // this.app.use(session({
     //   name: "taro-mongo",

@@ -18,7 +18,7 @@ router.post('/regist', (req, res) => {
         res.json()
       }
     })
-    res.json({ status: 500, data: newUser });
+    res.json({ status: 200, data: newUser });
   }
 });
 
