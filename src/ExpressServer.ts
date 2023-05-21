@@ -39,6 +39,7 @@ export default class ExpressServer {
         res.json({ message: "pong" });
       }
     );
+    this.app.use('/scripts', express.static(__dirname + "/node_modules/web3.js-browser/build/"))
     this.app.set("view engine", "ejs");
     this.app.set("views", "public");
     this.app.get("/", (req, res) => {
