@@ -1,0 +1,41 @@
+{
+  "compilerOptions": {
+    "outDir": "build",
+    "target": "es6",
+    "module": "commonjs",
+    "strict": true,
+    "allowJs": true,
+    "strictNullChecks": false,
+    "esModuleInterop": true,
+    "lib": [
+      "es6"
+    ],
+    "types": [
+      "reflect-metadata",
+    ],
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": "./src",
+    "resolveJsonModule": true,
+    "paths": {
+      "@n-errors/*": [
+        "errors/*"
+      ],
+      "@n-loggers/*": [
+        "loggers/*"
+      ],
+      "@n-configs/*": [
+        "configs/*"
+      ],
+      "@n-routes": [
+        "routes/index"
+      ],
+    }
+  },
+  "include": [
+    "src"
+  ],
+}

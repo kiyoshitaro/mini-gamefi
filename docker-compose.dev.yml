@@ -1,0 +1,50 @@
+version: "3.8"
+services:
+  app:
+    container_name: taro-gamefi-demo
+    build:
+      context: ./
+      dockerfile: ./docker/express/Dockerfile
+    working_dir: /home/node/app
+    command: npm start
+    restart: unless-stopped
+    tty: true
+    volumes:
+      - .:/home/node/app
+      - /home/node/app/node_modules
+    networks:
+      - taro-gamefi-network
+    ports:
+      - 8010:8000
+    depends_on:
+      - mongo
+    environment:
+      APP_ENV: dev
+      PORT: 8000
+      MONGO_FULL_CONNECT:
+      MONGO_HOST: mongo
+      MONGO_PORT: 27017
+      MONGO_USERNAME: root
+      MONGO_PASSWORD: 123456
+
+  mongo:
+    container_name: mongo-taro-gamefi
+    image: mongo
+    restart: unless-stopped
+    ports:
+      - 27019:27017
+    volumes:
+      - taro-gamefi-mongo:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: 123456
+    networks:
+      - taro-gamefi-network
+
+networks:
+  taro-gamefi-network:
+    driver: bridge
+
+volumes:
+  taro-gamefi-mongo:
+    driver: local
