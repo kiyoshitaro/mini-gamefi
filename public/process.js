@@ -1,6 +1,7 @@
 $(document).ready(function () {
   checkMetaMask();
 
+  // CONNECT SMC
   const abi = [
     {
       "anonymous": false,
@@ -59,11 +60,31 @@ $(document).ready(function () {
       "type": "function"
     }
   ];
-  const addressSMC = "0x15D06ba32AF455F31D5A401bA653bc3196C5d2e9";
+  const addressSMC = "0xc4349C7bFE2F69d0CFa0DD1015908ED696c7a7a4";
   const web3 = new Web3(window.ethereum);
   window.ethereum.enable();
   let contractMetamask = new web3.eth.Contract(abi, addressSMC);
   console.log("🚀 ~ file: process.js:8 ~ contractMetamask:", contractMetamask)
+
+  // CONNECT INFURA Websocket
+  const provider = new Web3.providers.WebsocketProvider('wss://sepolia.infura.io/ws/v3/f7a83991adf4490bb93e6674ddc4ace0');
+  let web3_infura = new Web3(provider);
+  let contractInfura = web3_infura.eth.Contract(abi, addressSMC);
+  console.log("🚀 ~ file: process.js:73 ~ contractInfura:", contractInfura);
+  contractInfura.events.pushData({ filter: {}, fromBlock: "latest" }, (err, data) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(data);
+      $("#listRegister").append(`
+        <tr id = "list1">
+          <td>${data.returnValues[0]}</td>
+          <td>${data.returnValues[1]}</td>
+        </tr>
+      `)
+    }
+  });
+
 
   let currAcc;
   $('#btnRegist').click(function () {
