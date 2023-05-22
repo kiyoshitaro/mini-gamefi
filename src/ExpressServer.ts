@@ -4,7 +4,7 @@ import errorMiddleware from "./middlewares/errorMiddleware";
 // import session from 'express-session';
 import mongoDB from "@n-configs/mongo";
 import router from "@n-routes";
-
+import path from "path";
 export default class ExpressServer {
   private app: express.Application;
   private readonly port: number;
@@ -39,7 +39,7 @@ export default class ExpressServer {
         res.json({ message: "pong" });
       }
     );
-    this.app.use('/scripts', express.static(__dirname + "/node_modules/web3.js-browser/build/"))
+    this.app.use('/scripts', express.static(path.join(__dirname, "..", "node_modules/web3.js-browser/build/")))
     this.app.set("view engine", "ejs");
     this.app.set("views", "public");
     this.app.get("/", (req, res) => {
