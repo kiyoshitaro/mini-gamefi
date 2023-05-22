@@ -2,7 +2,7 @@
   "private": true,
   "name": "gamefi-demo",
   "version": "1.0.0",
-  "description": "",
+  "description": "Demo minigamefi, connect with smartcontract writen by solidity via web3js",
   "main": "lib/index.js",
   "scripts": {
     "start": "ts-node-dev -r tsconfig-paths/register --respawn --transpile-only src/index.ts",
